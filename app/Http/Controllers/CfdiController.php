@@ -17,7 +17,7 @@ class CfdiController extends Controller
      */
     public function index()
     {
-        $cfdis = Cfdi::all();
+        $cfdis = Cfdi::all();// Recupera todos los registros
 
         return General::responseSuccessWithParams(['cfdis' => $cfdis]);
     }
@@ -47,6 +47,7 @@ class CfdiController extends Controller
         $data = $request->all();
         $cfdiH = new CfdiH();
 
+        //Se manda al helper el registro
         $cfdi = $cfdiH->create($data);
         if($cfdi)
             return $cfdi;
@@ -89,6 +90,7 @@ class CfdiController extends Controller
         //
     }
 
+    //Cancela un registro
     public function cancel($id)
     {
         $cfdi = Cfdi::find($id);
@@ -98,6 +100,12 @@ class CfdiController extends Controller
         $cfdi->save();
 
         return General::responseSuccess();
+    }
+
+    //Todo quedo este metodo por hacer requiero un poco mas de contexto.
+    public function sendCfdi($id)
+    {
+
     }
 
     /**
