@@ -15,9 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Ruta crear Clientes
 Route::post('/clients','ClienteController@store');
-Route::get('/cfdi','CfdiController@index');
+//Ruta listar CFDI
+Route::get('/cfdi/list','CfdiController@index');
+//Ruta Enviar CFDI
+Route::get('/cfdi/{id}/email','CfdiController@sendCfdi');
+//Ruta Crear CFDI
 Route::post('/cfdi/create','CfdiController@store');
+//Ruta Crear CFDI
 Route::patch('/cfdi/cancel/{id}','CfdiController@cancel');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

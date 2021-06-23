@@ -7,6 +7,7 @@ use App\Cliente;
 use App\Helpers\CfdiH;
 use App\Helpers\General;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CfdiController extends Controller
 {
@@ -109,6 +110,16 @@ class CfdiController extends Controller
     public function sendCfdi($id)
     {
 
+        $cfdi = Cfdi::find($id);
+        if(!$cfdi)
+            return General::responseRegisterError();
+
+        $subject = "CFDI email";
+        $email ='test@test.com';
+
+        Mail::send('emails.generic', ['description' => $cfdi], function($message) use ($email , $subject){
+            $message->to($email, 'GPM')->subject($subject);
+        });
     }
 
     /**
