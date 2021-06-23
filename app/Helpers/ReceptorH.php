@@ -12,17 +12,10 @@ class ReceptorH
     public function create($data,$cfdi)
     {
 
-
-        // Itera el array de receptor
-        foreach ($data['Receptor'] as $receptor)
-        {
-            //Valida si es array
-            if(!is_array($receptor))
-                $receptor = (array)$receptor;
+            $receptor = $data['Receptor'];
 
             //valida Campos requeridos
             $validate = General::validateRequest($receptor,Receptor::$rules);
-
             //verifica si hay un error y si existe lo retorna
             if($validate)
                 return $validate;
@@ -30,9 +23,9 @@ class ReceptorH
             //Crea registro
             Receptor::create([
                 'UID'               => $receptor['UID'],
-                'ResidenciaFiscal'  => $receptor['ResidenciaFiscal'],
+                'ResidenciaFiscal'  => $receptor['ResidenciaFiscal']?? "N/A",
                 'cfdiId'            => $cfdi->id,
             ]);
-        }
+
     }
 }

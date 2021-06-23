@@ -11,15 +11,14 @@ class ImpuestosH
     public function create($impuestos, $concepto)
     {
 
-        //Itera impuestos
-        foreach ($impuestos as $impuesto)
-        {
+
             //Valida si es array
-            if(!is_array($impuesto))
-                $impuesto = (array)$impuesto;
+            if(!is_array($impuestos))
+                $impuestos = (array)$impuestos;
+
 
             //valida Campos requeridos
-            $validate = General::validateRequest($impuesto,Impuesto::$rules);
+            $validate = General::validateRequest($impuestos,Impuesto::$rules);
 
             //verifica si hay un error y si existe lo retorna
             if($validate)
@@ -30,21 +29,24 @@ class ImpuestosH
                 'conceptoId' => $concepto->id,
             ]);
 
+
+
             $trasladosYretenidosH = new TrasladoYRetenidoH();
 
             //Verifica si hay traslados
-            if(array_key_exists('Traslados',$impuesto))
-                $trasladosYretenidosH->create($impuesto['Traslados'],$impuestoCreate,'traslado');//Crea traslados
+            if(array_key_exists('Traslados',$impuestos))
+                $trasladosYretenidosH->create($impuestos['Traslados'],$impuestoCreate,'traslado');//Crea traslados
 
             //Crea retenido
-            if(array_key_exists('Retenidos',$impuesto))
-                $trasladosYretenidosH->create($impuesto['Retenidos'],$impuestoCreate,'retenido');//Crea retenido
+            if(array_key_exists('Retenidos',$impuestos))
+                $trasladosYretenidosH->create($impuestos['Retenidos'],$impuestoCreate,'retenido');//Crea retenido
 
             //Crea locales
             $localesH = new LocalesH();
-            $localesH->create($impuesto['Locales'],$impuesto);
+            if(array_key_exists('Locales',$impuestos))
+            $localesH->create($impuestos['Locales'],$impuestos);
 
-        }
+
 
     }
 }

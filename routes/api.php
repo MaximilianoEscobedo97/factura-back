@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/clients','ClienteController');
-Route::resource('/cfdi','CfdiController');
+Route::post('/clients','ClienteController@store');
+Route::get('/cfdi','CfdiController@index');
+Route::post('/cfdi/create','CfdiController@store');
 Route::patch('/cfdi/cancel/{id}','CfdiController@cancel');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

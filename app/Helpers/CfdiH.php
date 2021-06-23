@@ -43,7 +43,10 @@ class CfdiH
 
         //Se crean conceptos
         $conceptoH =new ConceptosH();
-        $conceptoH->create($data,$cfdi);
+        $validateConcepto = $conceptoH->create($data,$cfdi);
+
+        if($validateReceptor)
+            return $validateReceptor;
 
         if(array_key_exists('CfdiRelacionados',$data))
         {

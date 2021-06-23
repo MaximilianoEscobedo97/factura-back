@@ -24,6 +24,8 @@ class ConceptosH
             if($validate)
                 return $validate;
 
+
+
             //Crea el registro
            $conceptoCreado = Concepto::create([
                 'ClaveProdServ'      => $concepto['ClaveProdServ'],
@@ -39,18 +41,20 @@ class ConceptosH
                 'cfdiId'             => $cfdi->id,
             ]);
 
+
+
             //verifica si hay registros de impuestos
             if(array_key_exists('Impuestos',$concepto))
             {
                 $impuestosH = new ImpuestosH();
-                $impuestosH->create($concepto['Impuestos'],$concepto);
+                $impuestosH->create($concepto['Impuestos'],$conceptoCreado);
             }
 
             //Verifica si hay registros de partes
             if(array_key_exists('Partes',$concepto))
             {
                 $partesH = new PartesH();
-                $partesH->create($concepto['Partes'],$concepto);
+                $partesH->create($concepto['Partes'],$conceptoCreado);
             }
 
 

@@ -17,6 +17,7 @@ class CfdiController extends Controller
      */
     public function index()
     {
+
         $cfdis = Cfdi::all();// Recupera todos los registros
 
         return General::responseSuccessWithParams(['cfdis' => $cfdis]);
@@ -40,7 +41,9 @@ class CfdiController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = General::validateRequest($request,Cfdi::$rules);
+        //Valida si los campos requeridos estan
+        $validate = General::validateRequest($request->all(),Cfdi::$rules);
+
         if($validate)
             return $validate;
 

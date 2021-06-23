@@ -12,9 +12,9 @@ class Impuesto extends Model
     protected $guarded = ['id'];
 
     static $rules = [
-        'Traslados' => 'required',
-        'Retenidos' => 'required',
-        'Locales' => 'required'
+       // 'Traslados' => 'required',
+        //'Retenidos' => 'required',
+        //'Locales' => 'required'
     ];
 
 }

@@ -15,7 +15,7 @@ class CreateConceptosTable extends Migration
     {
         Schema::create('conceptos', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('ClaveProdSev');
+            $table->string('ClaveProdServ');
             $table->string('NoIdentificacion')->nullable();
             $table->integer('Cantidad');
             $table->string('ClaveUnidad');
